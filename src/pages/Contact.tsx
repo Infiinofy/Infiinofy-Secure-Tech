@@ -23,7 +23,7 @@ const Contact = () => {
     e.preventDefault();
     
     toast({
-      title: "Message Sent! ✨",
+      title: "Message Sent! ",
       description: "We'll get back to you within 24 hours.",
     });
 

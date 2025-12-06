@@ -1,0 +1,372 @@
+/* CircularCalendar.css */
+
+/* Reset & Base Containers */
+.calendar-container {
+  background: transparent;
+  font-family: "Roboto Mono", monospace;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  overflow: visible;
+  position: relative;
+  user-select: none; /* Replaces disable text selection script */
+}
+
+/* --- Common Styles --- */
+.calendar-container h1 { color: #555; font-size: 25px; margin: 0;}
+.calendar-container h2 { color: #555; font-size: 15px; margin: 0;}
+
+.center-dial, .day-dial, .month-dial, .day-name-dial {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none; /* Let clicks pass through if needed */
+}
+
+/* To center the inner content properly due to translate offset */
+.day-dial .ring, .month-dial .ring, .day-name-dial .ring {
+    /* The ring needs to rotate around its own center */
+}
+
+/* Text spans */
+.day-text span, .day-preview span, 
+.month-text span, .month-preview span, 
+.day-name-text span, .day-name-preview span, 
+.hand-container, .center-preview span {
+  position: absolute; /* Key change: layout relies on absolute spans */
+  text-align: center;
+  transform-origin: center center;
+}
+
+/* --- Center Dial --- */
+.center-dial {
+  width: 150px;
+  height: 150px;
+  background-color: #202020;
+  border-radius: 50%;
+  box-shadow: 0px 2px 2px #000;
+  z-index: 10;
+  transition: all 0.5s;
+  animation: rotateIn 1.2s ease-out;
+}
+
+.hand-container-wrapper {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+}
+
+.hand-container {
+  position: absolute;
+  top: 0%;
+  left: calc(50% - 12.5px);
+  width: 25px;
+  height: 150px;
+}
+
+.hour-hand {
+  width: 10px; height: 50px;
+  background: #FFF; border-radius: 5px;
+  position: relative; top: calc(50% - 45px); left: calc(50% - 5px);
+  transition: all 0.5s;
+}
+
+.minute-hand {
+  width: 10px; height: 70px;
+  background: #CCC; border-radius: 5px;
+  position: relative; top: calc(50% - 65px); left: calc(50% - 5px);
+}
+
+.second-hand {
+  width: 2px; height: 70px;
+  background: #AAA; border-radius: 1px;
+  position: relative; top: calc(50% - 69px); left: calc(50% - 1px);
+}
+
+.head {
+  display: none;
+}
+.torso {
+  display: none;
+}
+
+/* --- Rings Common --- */
+.ring-back {
+  position: absolute; top: 0; left: 0;
+  opacity: 0.1; width: 100%; height: 100%;
+  border: solid 10px transparent; border-radius: 50%;
+  box-sizing: border-box;
+}
+.ring-back:before {
+  content: " "; position: absolute;
+  top: 5px; right: 5px; bottom: 5px; left: 5px;
+  border-radius: 50%; border: solid 45px #FFFFFF;
+}
+
+.ring {
+  position: relative; top: 0; left: 0;
+  width: 100%; height: 100%;
+  transition: all 0.5s;
+  border: solid 45px #202020;
+  border-radius: 50%;
+  border-bottom-color: transparent;
+  box-shadow: 0px -2px 2px #000;
+  box-sizing: border-box;
+}
+
+/* --- Specific Dials --- */
+.day-name-dial { 
+  width: 250px; 
+  height: 250px; 
+  z-index: 3;
+  animation: rotateIn 1.5s ease-out;
+}
+.month-dial { 
+  width: 350px; 
+  height: 350px; 
+  z-index: 2;
+  animation: rotateIn 1.8s ease-out;
+}
+.day-dial { 
+  width: 450px; 
+  height: 450px; 
+  z-index: 1;
+  animation: rotateIn 2.1s ease-out;
+}
+
+/* --- Previews (The Intro Text) --- */
+.center-preview span { position: absolute; top: 0%; left: calc(50% - 12.5px); height: 150px; width: 25px; }
+.day-name-preview span { position: absolute; top: calc(-25% - 5px); left: calc(50% - 12.5px); height: 250px; width: 25px; }
+.month-preview span { position: absolute; top: calc(-25% + 20px); left: calc(50% - 12.5px); height: 350px; width: 25px; }
+.day-preview span { position: absolute; top: calc(-25% + 45px); left: calc(50% - 12.5px); height: 450px; width: 25px; }
+
+/* --- Actual Text Positioning --- */
+.day-name-text span { position: absolute; top: calc(-25% + 5px); left: calc(50% - 6px); height: 232px; width: 12px; }
+.month-text span { position: absolute; top: calc(-25% + 30px); left: calc(50% - 6px); height: 332px; width: 12px; }
+.day-text span { position: absolute; top: calc(-25% + 55px); left: calc(50% - 6px); height: 432px; width: 12px; }
+
+/* --- Side Rings --- */
+.side-ring {
+  display: none;
+}
+
+/* --- Loading Animation --- */
+@keyframes rotateIn {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(-180deg) scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+  }
+}
+
+
+/* --- CHARACTER ROTATIONS (Ported from Original) --- */
+/* Center Preview */
+.center-preview .char1 { transform: rotate(-40deg); }
+.center-preview .char2 { transform: rotate(-20deg); }
+.center-preview .char3 { transform: rotate(0deg); }
+.center-preview .char4 { transform: rotate(20deg); }
+.center-preview .char5 { transform: rotate(40deg); }
+.center-preview .char6 { transform: rotate(60deg); }
+
+/* Day Name Preview (DAY NAME) */
+.day-name-preview .char1 { transform: rotate(-35deg); }
+.day-name-preview .char2 { transform: rotate(-25deg); }
+.day-name-preview .char3 { transform: rotate(-15deg); }
+.day-name-preview .char4 { transform: rotate(-5deg); }
+.day-name-preview .char5 { transform: rotate(5deg); }
+.day-name-preview .char6 { transform: rotate(15deg); }
+.day-name-preview .char7 { transform: rotate(25deg); }
+.day-name-preview .char8 { transform: rotate(35deg); }
+
+/* Day Name Text (MON TUE...) */
+.day-name-text .char1 { transform: rotate(-125.3571428571deg); }
+.day-name-text .char2 { transform: rotate(-115.7142857143deg); }
+.day-name-text .char3 { transform: rotate(-106.0714285714deg); }
+.day-name-text .char4 { transform: rotate(-96.4285714286deg); }
+.day-name-text .char5 { transform: rotate(-86.7857142857deg); }
+.day-name-text .char6 { transform: rotate(-77.1428571429deg); }
+.day-name-text .char7 { transform: rotate(-67.5deg); }
+.day-name-text .char8 { transform: rotate(-57.8571428571deg); }
+.day-name-text .char9 { transform: rotate(-48.2142857143deg); }
+.day-name-text .char10 { transform: rotate(-38.5714285714deg); }
+.day-name-text .char11 { transform: rotate(-28.9285714286deg); }
+.day-name-text .char12 { transform: rotate(-19.2857142857deg); }
+.day-name-text .char13 { transform: rotate(-9.6428571429deg); }
+.day-name-text .char14 { transform: rotate(0deg); }
+.day-name-text .char15 { transform: rotate(9.6428571429deg); }
+.day-name-text .char16 { transform: rotate(19.2857142857deg); }
+.day-name-text .char17 { transform: rotate(28.9285714286deg); }
+.day-name-text .char18 { transform: rotate(38.5714285714deg); }
+.day-name-text .char19 { transform: rotate(48.2142857143deg); }
+.day-name-text .char20 { transform: rotate(57.8571428571deg); }
+.day-name-text .char21 { transform: rotate(67.5deg); }
+.day-name-text .char22 { transform: rotate(77.1428571429deg); }
+.day-name-text .char23 { transform: rotate(86.7857142857deg); }
+.day-name-text .char24 { transform: rotate(96.4285714286deg); }
+.day-name-text .char25 { transform: rotate(106.0714285714deg); }
+.day-name-text .char26 { transform: rotate(115.7142857143deg); }
+.day-name-text .char27 { transform: rotate(125.3571428571deg); }
+.day-name-text .char28 { transform: rotate(135deg); }
+
+/* Month Preview */
+.month-preview .char1 { transform: rotate(-30deg); }
+.month-preview .char2 { transform: rotate(-15deg); }
+.month-preview .char3 { transform: rotate(0deg); }
+.month-preview .char4 { transform: rotate(15deg); }
+.month-preview .char5 { transform: rotate(30deg); }
+.month-preview .char6 { transform: rotate(45deg); }
+
+/* Month Text (JAN FEB...) */
+.month-text .char1 { transform: rotate(-129.375deg); }
+.month-text .char2 { transform: rotate(-123.75deg); }
+.month-text .char3 { transform: rotate(-118.125deg); }
+.month-text .char4 { transform: rotate(-112.5deg); }
+.month-text .char5 { transform: rotate(-106.875deg); }
+.month-text .char6 { transform: rotate(-101.25deg); }
+.month-text .char7 { transform: rotate(-95.625deg); }
+.month-text .char8 { transform: rotate(-90deg); }
+.month-text .char9 { transform: rotate(-84.375deg); }
+.month-text .char10 { transform: rotate(-78.75deg); }
+.month-text .char11 { transform: rotate(-73.125deg); }
+.month-text .char12 { transform: rotate(-67.5deg); }
+.month-text .char13 { transform: rotate(-61.875deg); }
+.month-text .char14 { transform: rotate(-56.25deg); }
+.month-text .char15 { transform: rotate(-50.625deg); }
+.month-text .char16 { transform: rotate(-45deg); }
+.month-text .char17 { transform: rotate(-39.375deg); }
+.month-text .char18 { transform: rotate(-33.75deg); }
+.month-text .char19 { transform: rotate(-28.125deg); }
+.month-text .char20 { transform: rotate(-22.5deg); }
+.month-text .char21 { transform: rotate(-16.875deg); }
+.month-text .char22 { transform: rotate(-11.25deg); }
+.month-text .char23 { transform: rotate(-5.625deg); }
+.month-text .char24 { transform: rotate(0deg); }
+.month-text .char25 { transform: rotate(5.625deg); }
+.month-text .char26 { transform: rotate(11.25deg); }
+.month-text .char27 { transform: rotate(16.875deg); }
+.month-text .char28 { transform: rotate(22.5deg); }
+.month-text .char29 { transform: rotate(28.125deg); }
+.month-text .char30 { transform: rotate(33.75deg); }
+.month-text .char31 { transform: rotate(39.375deg); }
+.month-text .char32 { transform: rotate(45deg); }
+.month-text .char33 { transform: rotate(50.625deg); }
+.month-text .char34 { transform: rotate(56.25deg); }
+.month-text .char35 { transform: rotate(61.875deg); }
+.month-text .char36 { transform: rotate(67.5deg); }
+.month-text .char37 { transform: rotate(73.125deg); }
+.month-text .char38 { transform: rotate(78.75deg); }
+.month-text .char39 { transform: rotate(84.375deg); }
+.month-text .char40 { transform: rotate(90deg); }
+.month-text .char41 { transform: rotate(95.625deg); }
+.month-text .char42 { transform: rotate(101.25deg); }
+.month-text .char43 { transform: rotate(106.875deg); }
+.month-text .char44 { transform: rotate(112.5deg); }
+.month-text .char45 { transform: rotate(118.125deg); }
+.month-text .char46 { transform: rotate(123.75deg); }
+.month-text .char47 { transform: rotate(129.375deg); }
+.month-text .char48 { transform: rotate(135deg); }
+
+/* Day Preview */
+.day-preview .char1 { transform: rotate(-22.5deg); }
+.day-preview .char2 { transform: rotate(0deg); }
+.day-preview .char3 { transform: rotate(22.5deg); }
+.day-preview .char4 { transform: rotate(45deg); }
+
+/* Day Text (01 02...) */
+.day-text .char1 { transform: rotate(-132.0967741935deg); }
+.day-text .char2 { transform: rotate(-129.1935483871deg); }
+.day-text .char3 { transform: rotate(-126.2903225806deg); }
+.day-text .char4 { transform: rotate(-123.3870967742deg); }
+.day-text .char5 { transform: rotate(-120.4838709677deg); }
+.day-text .char6 { transform: rotate(-117.5806451613deg); }
+.day-text .char7 { transform: rotate(-114.6774193548deg); }
+.day-text .char8 { transform: rotate(-111.7741935484deg); }
+.day-text .char9 { transform: rotate(-108.8709677419deg); }
+.day-text .char10 { transform: rotate(-105.9677419355deg); }
+.day-text .char11 { transform: rotate(-103.064516129deg); }
+.day-text .char12 { transform: rotate(-100.1612903226deg); }
+.day-text .char13 { transform: rotate(-97.2580645161deg); }
+.day-text .char14 { transform: rotate(-94.3548387097deg); }
+.day-text .char15 { transform: rotate(-91.4516129032deg); }
+.day-text .char16 { transform: rotate(-88.5483870968deg); }
+.day-text .char17 { transform: rotate(-85.6451612903deg); }
+.day-text .char18 { transform: rotate(-82.7419354839deg); }
+.day-text .char19 { transform: rotate(-79.8387096774deg); }
+.day-text .char20 { transform: rotate(-76.935483871deg); }
+.day-text .char21 { transform: rotate(-74.0322580645deg); }
+.day-text .char22 { transform: rotate(-71.1290322581deg); }
+.day-text .char23 { transform: rotate(-68.2258064516deg); }
+.day-text .char24 { transform: rotate(-65.3225806452deg); }
+.day-text .char25 { transform: rotate(-62.4193548387deg); }
+.day-text .char26 { transform: rotate(-59.5161290323deg); }
+.day-text .char27 { transform: rotate(-56.6129032258deg); }
+.day-text .char28 { transform: rotate(-53.7096774194deg); }
+.day-text .char29 { transform: rotate(-50.8064516129deg); }
+.day-text .char30 { transform: rotate(-47.9032258065deg); }
+.day-text .char31 { transform: rotate(-45deg); }
+.day-text .char32 { transform: rotate(-42.0967741935deg); }
+.day-text .char33 { transform: rotate(-39.1935483871deg); }
+.day-text .char34 { transform: rotate(-36.2903225806deg); }
+.day-text .char35 { transform: rotate(-33.3870967742deg); }
+.day-text .char36 { transform: rotate(-30.4838709677deg); }
+.day-text .char37 { transform: rotate(-27.5806451613deg); }
+.day-text .char38 { transform: rotate(-24.6774193548deg); }
+.day-text .char39 { transform: rotate(-21.7741935484deg); }
+.day-text .char40 { transform: rotate(-18.8709677419deg); }
+.day-text .char41 { transform: rotate(-15.9677419355deg); }
+.day-text .char42 { transform: rotate(-13.064516129deg); }
+.day-text .char43 { transform: rotate(-10.1612903226deg); }
+.day-text .char44 { transform: rotate(-7.2580645161deg); }
+.day-text .char45 { transform: rotate(-4.3548387097deg); }
+.day-text .char46 { transform: rotate(-1.4516129032deg); }
+.day-text .char47 { transform: rotate(1.4516129032deg); }
+.day-text .char48 { transform: rotate(4.3548387097deg); }
+.day-text .char49 { transform: rotate(7.2580645161deg); }
+.day-text .char50 { transform: rotate(10.1612903226deg); }
+.day-text .char51 { transform: rotate(13.064516129deg); }
+.day-text .char52 { transform: rotate(15.9677419355deg); }
+.day-text .char53 { transform: rotate(18.8709677419deg); }
+.day-text .char54 { transform: rotate(21.7741935484deg); }
+.day-text .char55 { transform: rotate(24.6774193548deg); }
+.day-text .char56 { transform: rotate(27.5806451613deg); }
+.day-text .char57 { transform: rotate(30.4838709677deg); }
+.day-text .char58 { transform: rotate(33.3870967742deg); }
+.day-text .char59 { transform: rotate(36.2903225806deg); }
+.day-text .char60 { transform: rotate(39.1935483871deg); }
+.day-text .char61 { transform: rotate(42.0967741935deg); }
+.day-text .char62 { transform: rotate(45deg); }
+.day-text .char63 { transform: rotate(47.9032258065deg); }
+.day-text .char64 { transform: rotate(50.8064516129deg); }
+.day-text .char65 { transform: rotate(53.7096774194deg); }
+.day-text .char66 { transform: rotate(56.6129032258deg); }
+.day-text .char67 { transform: rotate(59.5161290323deg); }
+.day-text .char68 { transform: rotate(62.4193548387deg); }
+.day-text .char69 { transform: rotate(65.3225806452deg); }
+.day-text .char70 { transform: rotate(68.2258064516deg); }
+.day-text .char71 { transform: rotate(71.1290322581deg); }
+.day-text .char72 { transform: rotate(74.0322580645deg); }
+.day-text .char73 { transform: rotate(76.935483871deg); }
+.day-text .char74 { transform: rotate(79.8387096774deg); }
+.day-text .char75 { transform: rotate(82.7419354839deg); }
+.day-text .char76 { transform: rotate(85.6451612903deg); }
+.day-text .char77 { transform: rotate(88.5483870968deg); }
+.day-text .char78 { transform: rotate(91.4516129032deg); }
+.day-text .char79 { transform: rotate(94.3548387097deg); }
+.day-text .char80 { transform: rotate(97.2580645161deg); }
+.day-text .char81 { transform: rotate(100.1612903226deg); }
+.day-text .char82 { transform: rotate(103.064516129deg); }
+.day-text .char83 { transform: rotate(105.9677419355deg); }
+.day-text .char84 { transform: rotate(108.8709677419deg); }
+.day-text .char85 { transform: rotate(111.7741935484deg); }
+.day-text .char86 { transform: rotate(114.6774193548deg); }
+.day-text .char87 { transform: rotate(117.5806451613deg); }
+.day-text .char88 { transform: rotate(120.4838709677deg); }
+.day-text .char89 { transform: rotate(123.3870967742deg); }
+.day-text .char90 { transform: rotate(126.2903225806deg); }
+.day-text .char91 { transform: rotate(129.1935483871deg); }
+.day-text .char92 { transform: rotate(132.0967741935deg); }
+.day-text .char93 { transform: rotate(135deg); }

@@ -1,14 +1,93 @@
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import heroBg from "@/assets/hero-bg.jpg";
+import MeteorShower from "../MeteorShower";
+
+const phrases = [
+  "Digital Presence",
+  "Intelligent Products",
+  "Future-Ready Platforms",
+];
 
 const Hero = () => {
+const [displayText, setDisplayText] = useState("");
+const [phraseIndex, setPhraseIndex] = useState(0);
+const [phase, setPhase] = useState<Phase>("typing");
+  const particles = useMemo(
+    () =>
+      [...Array(20)].map(() => ({
+        left: Math.random() * 100,
+        top: Math.random() * 100,
+        duration: 3 + Math.random() * 2,
+        delay: Math.random() * 2,
+      })),
+    []
+  );
+
+//  const phrases = [
+//   "Digital Presence",
+//   "Intelligent Products",
+//   "Future-Ready Platforms",
+// ];
+
+const TYPING_SPEED = 80;      // ms per character when typing
+const DELETING_SPEED = 40;    // ms per character when deleting
+const PAUSE_AT_END = 1200;    // pause when phrase is fully typed
+const PAUSE_AT_START = 300;   // pause when phrase has been fully deleted
+
+type Phase = "typing" | "pausing" | "deleting";
+
+
+useEffect(() => {
+  const currentPhrase = phrases[phraseIndex];
+
+  let delay: number;
+
+  if (phase === "typing") {
+    delay = TYPING_SPEED;
+  } else if (phase === "deleting") {
+    delay = DELETING_SPEED;
+  } else {
+    // pausing
+    delay = displayText === "" ? PAUSE_AT_START : PAUSE_AT_END;
+  }
+
+  const timeout = setTimeout(() => {
+    if (phase === "typing") {
+      const next = currentPhrase.slice(0, displayText.length + 1);
+      setDisplayText(next);
+
+      if (next === currentPhrase) {
+        setPhase("pausing");
+      }
+    } else if (phase === "deleting") {
+      const next = currentPhrase.slice(0, displayText.length - 1);
+      setDisplayText(next);
+
+      if (next === "") {
+        setPhase("pausing");
+        setPhraseIndex((prev) => (prev + 1) % phrases.length);
+      }
+    } else if (phase === "pausing") {
+      // Decide whether to start typing or deleting after pause
+      if (displayText === "") {
+        setPhase("typing");      // start typing next phrase
+      } else {
+        setPhase("deleting");    // start deleting current phrase
+      }
+    }
+  }, delay);
+
+  return () => clearTimeout(timeout);
+}, [displayText, phraseIndex, phase]);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
-      <div 
+      {/* <div 
         className="absolute inset-0 z-0"
         style={{
           backgroundImage: `url(${heroBg})`,
@@ -16,27 +95,28 @@ const Hero = () => {
           backgroundPosition: 'center',
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background" />
-      </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/25 via-background/75 to-background" />
+      </div> */}
+      <MeteorShower />
 
       {/* Animated Particles */}
       <div className="absolute inset-0 z-0">
-        {[...Array(20)].map((_, i) => (
+        {particles.map((particle, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-primary/30 rounded-full"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              left: `${particle.left}%`,
+              top: `${particle.top}%`,
             }}
             animate={{
               y: [0, -30, 0],
               opacity: [0.2, 0.8, 0.2],
             }}
             transition={{
-              duration: 3 + Math.random() * 2,
+              duration: particle.duration,
               repeat: Infinity,
-              delay: Math.random() * 2,
+              delay: particle.delay,
             }}
           />
         ))}
@@ -51,20 +131,23 @@ const Hero = () => {
             transition={{ duration: 0.8 }}
             className="mb-6"
           >
-            <span className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium">
-              <Sparkles className="w-4 h-4" />
-              <span>Premium Digital Solutions</span>
-            </span>
+          
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl md:text-7xl font-bold mb-6 leading-tight"
+            className="text-5xl md:text-7xl font-bold mb-6 leading-[1.1]"
           >
-            Elevate Your Digital
-            <span className="block text-gradient-gold">Presence</span>
+            Elevate Your
+            <span className="block text-gradient-gold leading-[1.2]">
+              {displayText || "\u00A0"}
+              <span
+                className="border-l-2 border-primary/70 ml-2 animate-pulse"
+                aria-hidden="true"
+              />
+            </span>
           </motion.h1>
 
           <motion.p

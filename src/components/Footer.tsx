@@ -12,7 +12,7 @@ const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <Sparkles className="w-6 h-6 text-primary" />
-              <span className="text-xl font-bold text-gradient-gold">Luxe Digital</span>
+              <span className="text-xl font-bold text-gradient-gold">ShreeJin Tech</span>
             </div>
             <p className="text-sm text-muted-foreground">
               Premium digital solutions for modern businesses. Elevating brands through innovation and excellence.
@@ -93,7 +93,7 @@ const Footer = () => {
 
         <div className="border-t border-border mt-8 pt-8 text-center">
           <p className="text-sm text-muted-foreground">
-            © {currentYear} Luxe Digital Solutions. All rights reserved.
+            © {currentYear} ShreeJin Tech. All rights reserved.
           </p>
         </div>
       </div>

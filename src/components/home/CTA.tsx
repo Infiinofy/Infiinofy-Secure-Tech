@@ -18,7 +18,7 @@ const CTA = () => {
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             Ready to Elevate Your
-            <span className="block text-gradient-gold">Digital Presence?</span>
+            <span className="block text-gradient-gold leading-[1.2]">Digital Presence?</span>
           </h2>
           <p className="text-xl text-muted-foreground mb-10">
             Let's discuss how we can transform your vision into reality. Schedule a free consultation today.

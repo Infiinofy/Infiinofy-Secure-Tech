@@ -17,12 +17,43 @@ const Navigation = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleContactClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (location.pathname === "/") {
+      // Already on home page, scroll to contact section
+      const element = document.getElementById("contact");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      // Navigate to home and scroll after load
+      window.location.href = "/#contact";
+    }
+    setIsOpen(false);
+  };
+
+  const handleServicesClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (location.pathname === "/") {
+      // Already on home page, scroll to services section
+      const element = document.getElementById("services");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      // Navigate to home and scroll after load
+      window.location.href = "/#services";
+    }
+    setIsOpen(false);
+  };
+
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "About Us", path: "/about" },
+    { name: "Services", path: "/#services" },
     { name: "Projects", path: "/projects" },
     { name: "Schedule Meeting", path: "/schedule" },
-    { name: "Contact", path: "/contact" },
+    { name: "Contact", path: "/#contact" },
   ];
 
   return (
@@ -42,25 +73,49 @@ const Navigation = () => {
               <Sparkles className="w-8 h-8 text-primary transition-transform group-hover:rotate-12" />
               <div className="absolute inset-0 blur-lg bg-primary/30 animate-glow-pulse" />
             </div>
-            <span className="text-2xl font-bold text-gradient-gold">Luxe Digital</span>
+            <span className="text-2xl font-bold text-gradient-gold">ShreeJin Tech</span>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={cn(
-                  "text-sm font-medium transition-colors hover:text-primary",
-                  location.pathname === link.path
-                    ? "text-primary"
-                    : "text-foreground/80"
-                )}
-              >
-                {link.name}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              if (link.name === "Contact") {
+                return (
+                  <button
+                    key={link.path}
+                    onClick={handleContactClick}
+                    className="text-sm font-medium transition-colors hover:text-primary text-foreground/80"
+                  >
+                    {link.name}
+                  </button>
+                );
+              }
+              if (link.name === "Services") {
+                return (
+                  <button
+                    key={link.path}
+                    onClick={handleServicesClick}
+                    className="text-sm  font-medium transition-colors hover:text-primary text-foreground/80"
+                  >
+                    {link.name}
+                  </button>
+                );
+              }
+              return (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={cn(
+                    "text-sm font-medium transition-colors hover:text-primary",
+                    location.pathname === link.path
+                      ? "text-primary"
+                      : "text-foreground/80"
+                  )}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
             <Link to="/schedule">
               <Button className="hover-glow">
                 Get Started
@@ -81,21 +136,45 @@ const Navigation = () => {
         {isOpen && (
           <div className="md:hidden pt-4 pb-6 animate-fade-in">
             <div className="flex flex-col space-y-4">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  onClick={() => setIsOpen(false)}
-                  className={cn(
-                    "text-sm font-medium transition-colors hover:text-primary py-2",
-                    location.pathname === link.path
-                      ? "text-primary"
-                      : "text-foreground/80"
-                  )}
-                >
-                  {link.name}
-                </Link>
-              ))}
+              {navLinks.map((link) => {
+                if (link.name === "Contact") {
+                  return (
+                    <button
+                      key={link.path}
+                      onClick={handleContactClick}
+                      className="text-sm font-medium text-left transition-colors hover:text-primary py-2 text-foreground/80"
+                    >
+                      {link.name}
+                    </button>
+                  );
+                }
+                if (link.name === "Services") {
+                  return (
+                    <button
+                      key={link.path}
+                      onClick={handleServicesClick}
+                      className="text-sm font-medium text-left transition-colors hover:text-primary py-2 text-foreground/80"
+                    >
+                      {link.name}
+                    </button>
+                  );
+                }
+                return (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    onClick={() => setIsOpen(false)}
+                    className={cn(
+                      "text-sm font-medium transition-colors hover:text-primary py-2",
+                      location.pathname === link.path
+                        ? "text-primary"
+                        : "text-foreground/80"
+                    )}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
               <Link to="/schedule" onClick={() => setIsOpen(false)}>
                 <Button className="w-full hover-glow">
                   Get Started
