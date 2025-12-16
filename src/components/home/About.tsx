@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { motion } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const logoFiles = [
   "zoho.webp",
@@ -40,6 +41,8 @@ const outerRadiusPercent = 48;
 const innerRadiusPercent = 32;
 
 const About = () => {
+  const isMobile = useIsMobile();
+  
   const { outerLogos, innerLogos } = useMemo(() => {
     // Start from -90 degrees (top) and evenly distribute
     const startAngle = -Math.PI / 2;
@@ -126,7 +129,11 @@ const About = () => {
             <motion.div
               className="absolute inset-0 z-20"
               animate={{ rotate: 360 }}
-              transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
+              transition={{ 
+                duration: isMobile ? 45 : 28,
+                repeat: Infinity, 
+                ease: "linear" 
+              }}
             >
               {outerLogos.map((logo) => (
                 <div
@@ -140,13 +147,17 @@ const About = () => {
                 >
                   <motion.div
                     animate={{ rotate: -360 }}
-                    transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
+                    transition={{ 
+                      duration: isMobile ? 45 : 28,
+                      repeat: Infinity, 
+                      ease: "linear" 
+                    }}
                   >
-                    <div className="w-16 h-16 rounded-full bg-card/90 border border-border/70 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.45)] flex items-center justify-center backdrop-blur-sm z-20">
+                    <div className={`${isMobile ? "w-12 h-12" : "w-16 h-16"} rounded-full bg-card/90 border border-border/70 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.45)] flex items-center justify-center backdrop-blur-sm z-20`}>
                       <img
                         src={`/Logos/${logo.file}`}
                         alt={`${logo.file} logo`}
-                        className="w-12 h-12 object-contain relative z-20"
+                        className={`${isMobile ? "w-8 h-8" : "w-12 h-12"} object-contain relative z-20`}
                         loading="lazy"
                         draggable={false}
                         onError={(e) => {
@@ -168,7 +179,11 @@ const About = () => {
             <motion.div
               className="absolute inset-0 z-20"
               animate={{ rotate: -360 }}
-              transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+              transition={{ 
+                duration: isMobile ? 36 : 22,
+                repeat: Infinity, 
+                ease: "linear" 
+              }}
             >
               {innerLogos.map((logo) => (
                 <div
@@ -182,13 +197,17 @@ const About = () => {
                 >
                   <motion.div
                     animate={{ rotate: 360 }}
-                    transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+                    transition={{ 
+                      duration: isMobile ? 36 : 22,
+                      repeat: Infinity, 
+                      ease: "linear" 
+                    }}
                   >
-                    <div className="w-16 h-16 rounded-full bg-card/90 border border-border/70 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.45)] flex items-center justify-center backdrop-blur-sm z-20">
+                    <div className={`${isMobile ? "w-12 h-12" : "w-16 h-16"} rounded-full bg-card/90 border border-border/70 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.45)] flex items-center justify-center backdrop-blur-sm z-20`}>
                       <img
                         src={`/other logos/${logo.file}`}
                         alt={`${logo.file} logo`}
-                        className="w-12 h-12 object-contain relative z-20"
+                        className={`${isMobile ? "w-8 h-8" : "w-12 h-12"} object-contain relative z-20`}
                         loading="lazy"
                         draggable={false}
                         onError={(e) => {
@@ -221,7 +240,7 @@ const About = () => {
                 {/* <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground mb-2">
                   Zoho One Specialists
                 </p> */}
-                <p className="text-2xl font-semibold text-gradient-gold">
+                <p className="lg:text-2xl sm:text-sm font-semibold text-gradient-gold">
                   Integrated. Automated. Secure.
                 </p>
               </div>

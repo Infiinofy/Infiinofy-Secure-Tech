@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Hero from "@/components/home/Hero";
@@ -10,6 +12,20 @@ import ContactSection from "@/components/home/Contact";
 import FAQ from "@/components/home/FAQ";
 
 const Home = () => {
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    const section = searchParams.get("section");
+    if (section) {
+      setTimeout(() => {
+        const element = document.getElementById(section);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    }
+  }, [searchParams]);
+
   return (
     <div className="min-h-screen">
       <Navigation />

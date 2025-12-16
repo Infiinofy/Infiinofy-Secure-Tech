@@ -10,6 +10,10 @@ const Navigation = () => {
   const location = useLocation();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
+  useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
@@ -19,6 +23,8 @@ const Navigation = () => {
 
   const handleContactClick = (e: React.MouseEvent) => {
     e.preventDefault();
+    setIsOpen(false);
+    
     if (location.pathname === "/") {
       // Already on home page, scroll to contact section
       const element = document.getElementById("contact");
@@ -26,14 +32,15 @@ const Navigation = () => {
         element.scrollIntoView({ behavior: "smooth" });
       }
     } else {
-      // Navigate to home and scroll after load
-      window.location.href = "/#contact";
+      // Navigate to home first, then scroll
+      window.location.href = "/?section=contact";
     }
-    setIsOpen(false);
   };
 
   const handleServicesClick = (e: React.MouseEvent) => {
     e.preventDefault();
+    setIsOpen(false);
+    
     if (location.pathname === "/") {
       // Already on home page, scroll to services section
       const element = document.getElementById("services");
@@ -41,10 +48,9 @@ const Navigation = () => {
         element.scrollIntoView({ behavior: "smooth" });
       }
     } else {
-      // Navigate to home and scroll after load
-      window.location.href = "/#services";
+      // Navigate to home first, then scroll
+      window.location.href = "/?section=services";
     }
-    setIsOpen(false);
   };
 
   const navLinks = [

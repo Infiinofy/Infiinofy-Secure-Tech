@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/card";
 import { ExternalLink } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import project1 from "@/assets/project-1.jpg";
+import AtlasImitation from "@/assets/AtlasImitation.png";
 import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
 import project4 from "@/assets/project-4.jpg";
@@ -15,37 +16,15 @@ const Projects = () => {
 
   const projects = [
     {
-      title: "E-Commerce Platform",
+      title: "Atlas Imitation",
       category: "Web Development",
       description: "A luxury e-commerce platform with seamless checkout and personalized recommendations.",
       fullDescription: "Built a comprehensive e-commerce solution featuring AI-powered product recommendations, secure payment processing, inventory management, and an intuitive admin dashboard. The platform handles 100K+ daily visitors with 99.9% uptime.",
-      image: project1,
-      tags: ["React", "Node.js", "MongoDB", "Stripe"],
+      image: AtlasImitation,
+      tags: ["Shopify", "Liquid"],
+      link: "https://www.atlasimitation.com",
     },
-    {
-      title: "Fintech Mobile App",
-      category: "Mobile Development",
-      description: "Secure financial management app with real-time analytics and investment tracking.",
-      fullDescription: "Developed a feature-rich fintech application with biometric authentication, real-time market data integration, portfolio management, and seamless banking integration. The app serves 50K+ active users with bank-level security.",
-      image: project2,
-      tags: ["React Native", "Firebase", "Plaid API"],
-    },
-    {
-      title: "Corporate Website",
-      category: "UI/UX Design",
-      description: "Modern corporate website with interactive elements and responsive design.",
-      fullDescription: "Designed and developed a sophisticated corporate website featuring animated interactions, multi-language support, content management system, and optimized performance. The site increased client engagement by 150%.",
-      image: project3,
-      tags: ["Next.js", "Tailwind", "Framer Motion"],
-    },
-    {
-      title: "Analytics Dashboard",
-      category: "Data Visualization",
-      description: "Real-time analytics platform with comprehensive data visualization.",
-      fullDescription: "Created an enterprise-grade analytics platform with customizable dashboards, real-time data processing, advanced filtering, and automated reporting. The system processes millions of data points daily.",
-      image: project4,
-      tags: ["React", "D3.js", "PostgreSQL"],
-    },
+   
   ];
 
   return (
@@ -165,6 +144,16 @@ const Projects = () => {
                         </span>
                       ))}
                     </div>
+                  </div>
+                  <div className="pt-4 border-t border-border">
+                    <a
+                      href={projects[selectedProject].link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-primary hover:underline font-medium"
+                    >
+                      View Project <ExternalLink className="w-4 h-4" />
+                    </a>
                   </div>
                 </div>
               </>
