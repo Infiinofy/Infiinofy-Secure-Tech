@@ -138,56 +138,69 @@ const Navigation = () => {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Navigation Overlay */}
         {isOpen && (
-          <div className="md:hidden pt-4 pb-6 animate-fade-in">
-            <div className="flex flex-col space-y-4">
-              {navLinks.map((link) => {
-                if (link.name === "Contact") {
-                  return (
-                    <button
-                      key={link.path}
-                      onClick={handleContactClick}
-                      className="text-sm font-medium text-left transition-colors hover:text-primary py-2 text-foreground/80"
-                    >
-                      {link.name}
-                    </button>
-                  );
-                }
-                if (link.name === "Services") {
-                  return (
-                    <button
-                      key={link.path}
-                      onClick={handleServicesClick}
-                      className="text-sm font-medium text-left transition-colors hover:text-primary py-2 text-foreground/80"
-                    >
-                      {link.name}
-                    </button>
-                  );
-                }
-                return (
-                  <Link
-                    key={link.path}
-                    to={link.path}
-                    onClick={() => setIsOpen(false)}
-                    className={cn(
-                      "text-sm font-medium transition-colors hover:text-primary py-2",
-                      location.pathname === link.path
-                        ? "text-primary"
-                        : "text-foreground/80"
-                    )}
-                  >
-                    {link.name}
-                  </Link>
-                );
-              })}
-              <Link to="/schedule" onClick={() => setIsOpen(false)}>
-                <Button className="w-full hover-glow">
-                  Get Started
-                </Button>
-              </Link>
+          <>
+            {/* Backdrop */}
+            <div 
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden animate-fade-in"
+              onClick={() => setIsOpen(false)}
+            />
+            
+            {/* Mobile Menu */}
+            <div className="fixed left-0 right-0 top-[72px] md:hidden z-50 animate-fade-in">
+              <div className="mx-6 rounded-2xl bg-background/95 backdrop-blur-xl border border-border/50 shadow-2xl">
+                <div className="flex flex-col space-y-1 p-6">
+                  {navLinks.map((link) => {
+                    if (link.name === "Contact") {
+                      return (
+                        <button
+                          key={link.path}
+                          onClick={handleContactClick}
+                          className="text-sm font-medium text-left transition-colors hover:text-primary hover:bg-primary/10 py-3 px-4 rounded-lg text-foreground/80"
+                        >
+                          {link.name}
+                        </button>
+                      );
+                    }
+                    if (link.name === "Services") {
+                      return (
+                        <button
+                          key={link.path}
+                          onClick={handleServicesClick}
+                          className="text-sm font-medium text-left transition-colors hover:text-primary hover:bg-primary/10 py-3 px-4 rounded-lg text-foreground/80"
+                        >
+                          {link.name}
+                        </button>
+                      );
+                    }
+                    return (
+                      <Link
+                        key={link.path}
+                        to={link.path}
+                        onClick={() => setIsOpen(false)}
+                        className={cn(
+                          "text-sm font-medium transition-colors hover:text-primary hover:bg-primary/10 py-3 px-4 rounded-lg",
+                          location.pathname === link.path
+                            ? "text-primary bg-primary/10"
+                            : "text-foreground/80"
+                        )}
+                      >
+                        {link.name}
+                      </Link>
+                    );
+                  })}
+                  <div className="pt-4">
+                    <Link to="/schedule" onClick={() => setIsOpen(false)}>
+                      <Button className="w-full hover-glow">
+                        Get Started
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
+          </>
         )}
       </div>
     </nav>

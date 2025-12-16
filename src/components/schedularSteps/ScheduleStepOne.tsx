@@ -49,7 +49,7 @@ export default function ScheduleStepOne({ onNext, date, setDate }: ScheduleStepO
             weekStartsOn={0}
             classNames={{
               ...defaultClassNames,
-              root: `${defaultClassNames.root} p-2 sm:p-4 rounded-lg bg-transparent min-w-[320px] md:min-w-0`,
+              root: `${defaultClassNames.root} p-2 sm:p-4 rounded-2xl bg-transparent min-w-[320px] md:min-w-0 border border-cyan-500 `,
               day: `p-2 sm:p-3 m-[4px] rounded-full hover:bg-cyan-500 transition-colors text-sm sm:text-base text-white`,
               today: `border-cyan-500`,
               selected: `bg-cyan-500 text-white`,
