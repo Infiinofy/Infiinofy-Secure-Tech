@@ -47,8 +47,11 @@ const About = () => {
     // Start from -90 degrees (top) and evenly distribute
     const startAngle = -Math.PI / 2;
     
-    const outer = logoFiles.map((file, idx) => {
-      const angle = startAngle + (idx / logoFiles.length) * Math.PI * 2;
+    // Mobile: Reduce outer logos to 12 for better performance
+    const outerLogosToShow = isMobile ? logoFiles.slice(0, 12) : logoFiles;
+    
+    const outer = outerLogosToShow.map((file, idx) => {
+      const angle = startAngle + (idx / outerLogosToShow.length) * Math.PI * 2;
       const x = 50 + outerRadiusPercent * Math.cos(angle);
       const y = 50 + outerRadiusPercent * Math.sin(angle);
       return { file, x, y };
@@ -62,7 +65,7 @@ const About = () => {
     });
 
     return { outerLogos: outer, innerLogos: inner };
-  }, []);
+  }, [isMobile]);
 
   return (
     <section className="py-24 relative overflow-hidden">
@@ -134,6 +137,11 @@ const About = () => {
                 repeat: Infinity, 
                 ease: "linear" 
               }}
+              style={{
+                willChange: 'transform',
+                backfaceVisibility: 'hidden',
+                transform: 'translateZ(0)',
+              }}
             >
               {outerLogos.map((logo) => (
                 <div
@@ -142,7 +150,7 @@ const About = () => {
                   style={{
                     left: `${logo.x}%`,
                     top: `${logo.y}%`,
-                    transform: "translate(-50%, -50%)",
+                    transform: "translate(-50%, -50%) translateZ(0)",
                   }}
                 >
                   <motion.div
@@ -152,6 +160,11 @@ const About = () => {
                       repeat: Infinity, 
                       ease: "linear" 
                     }}
+                    style={{
+                      willChange: 'transform',
+                      backfaceVisibility: 'hidden',
+                      transform: 'translateZ(0)',
+                    }}
                   >
                     <div className={`${isMobile ? "w-12 h-12" : "w-16 h-16"} rounded-full bg-card/90 border border-border/70 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.45)] flex items-center justify-center backdrop-blur-sm z-20`}>
                       <img
@@ -160,6 +173,10 @@ const About = () => {
                         className={`${isMobile ? "w-8 h-8" : "w-12 h-12"} object-contain relative z-20`}
                         loading="lazy"
                         draggable={false}
+                        style={{
+                          transform: 'translateZ(0)',
+                          backfaceVisibility: 'hidden',
+                        }}
                         onError={(e) => {
                           const target = e.currentTarget;
                           if (target.src !== `${window.location.origin}/Logos/zoho.webp`) {
@@ -184,6 +201,11 @@ const About = () => {
                 repeat: Infinity, 
                 ease: "linear" 
               }}
+              style={{
+                willChange: 'transform',
+                backfaceVisibility: 'hidden',
+                transform: 'translateZ(0)',
+              }}
             >
               {innerLogos.map((logo) => (
                 <div
@@ -192,7 +214,7 @@ const About = () => {
                   style={{
                     left: `${logo.x}%`,
                     top: `${logo.y}%`,
-                    transform: "translate(-50%, -50%)",
+                    transform: "translate(-50%, -50%) translateZ(0)",
                   }}
                 >
                   <motion.div
@@ -202,6 +224,11 @@ const About = () => {
                       repeat: Infinity, 
                       ease: "linear" 
                     }}
+                    style={{
+                      willChange: 'transform',
+                      backfaceVisibility: 'hidden',
+                      transform: 'translateZ(0)',
+                    }}
                   >
                     <div className={`${isMobile ? "w-12 h-12" : "w-16 h-16"} rounded-full bg-card/90 border border-border/70 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.45)] flex items-center justify-center backdrop-blur-sm z-20`}>
                       <img
@@ -210,6 +237,10 @@ const About = () => {
                         className={`${isMobile ? "w-8 h-8" : "w-12 h-12"} object-contain relative z-20`}
                         loading="lazy"
                         draggable={false}
+                        style={{
+                          transform: 'translateZ(0)',
+                          backfaceVisibility: 'hidden',
+                        }}
                         onError={(e) => {
                           const target = e.currentTarget;
                           target.style.display = "none";
@@ -225,14 +256,24 @@ const About = () => {
               className="absolute inset-10 rounded-full border border-primary/15 z-10"
               animate={{ rotate: -360 }}
               transition={{ duration: 34, repeat: Infinity, ease: "linear" }}
+              style={{
+                willChange: 'transform',
+                backfaceVisibility: 'hidden',
+                transform: 'translateZ(0)',
+              }}
             />
 
-            <div className="absolute inset-16 rounded-full bg-gradient-to-b from-primary/10 via-background to-background/80 backdrop-blur-xl border border-primary/10 z-10" />
+            <div className="absolute inset-16 rounded-full bg-gradient-to-b from-primary/10 via-background to-background/80 backdrop-blur-xl border border-primary/10 z-10" style={{ transform: 'translateZ(0)' }} />
 
             <motion.div
               className="absolute inset-24 rounded-full bg-gradient-to-r from-primary/30 via-secondary/30 to-accent/30 blur-xl z-10"
               animate={{ scale: [1, 1.05, 1] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              style={{
+                willChange: 'transform',
+                backfaceVisibility: 'hidden',
+                transform: 'translateZ(0)',
+              }}
             />
 
             <div className="absolute inset-28 rounded-full bg-background/60 border border-border/60 flex items-center justify-center text-center px-8 z-30">
