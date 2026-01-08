@@ -29,7 +29,7 @@ const ValueProposition = () => {
               Why Choose <span className="text-gradient-gold">INFIINOFY</span>
             </h2>
             <p className="text-xl text-muted-foreground mb-8 ">
-              We don't just build products – we craft experiences that resonate with your audience and drive measurable results.
+              We don't just build products, we craft experiences that resonate with your audience and drive measurable results.
             </p>
 
             <div className="space-y-4 flex flex-col items-center">

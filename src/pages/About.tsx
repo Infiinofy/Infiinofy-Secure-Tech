@@ -3,7 +3,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Users, Target, Award, TrendingUp } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import aboutVisual from "@/assets/about-visual.jpg";
+import aboutVisual from "@/assets/aboutus.jpeg";
 
 const About = () => {
   const values = [
@@ -72,7 +72,7 @@ const About = () => {
                     Our name defines who we are. <strong>Infi</strong> stands for infinite possibilities, <strong>Ino</strong> represents innovation, and <strong>fy</strong> means to make things happen. Together, INFIINOFY means to make <em>infinite innovation happen.</em> We&apos;re not just developers we&apos;re <strong>Infiinos</strong>, infinite innovators who think beyond code to build meaningful, future-ready experiences.
                   </p>
                   <p className="text-base sm:text-lg md:text-xl">
-                   The falling star on our website represents your dream the vision you want to bring to life. Just like a wish made on a falling star, we&apos;re here to help turn your ideas into reality. When your dream grows, we grow with you — and that&apos;s the heart of INFIINOFY.
+                   The falling star on our website represents your dream the vision you want to bring to life. Just like a wish made on a falling star, we&apos;re here to help turn your ideas into reality. When your dream grows, we grow with you and that&apos;s the heart of INFIINOFY.
                   </p>
                 </div>
               </motion.div>
