@@ -4,6 +4,13 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const CTA = () => {
+  const scrollToContact = () => {
+    const contactSection = document.getElementById("contact");
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <section className="py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10" />
@@ -30,11 +37,14 @@ const CTA = () => {
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
-            <Link to="/contact">
-              <Button size="lg" variant="secondary" className="text-lg px-8 hover-lift">
-                Contact Us
-              </Button>
-            </Link>
+            <Button 
+              size="lg" 
+              variant="secondary" 
+              className="text-lg px-8 hover-lift"
+              onClick={scrollToContact}
+            >
+              Contact Us
+            </Button>
           </div>
         </motion.div>
       </div>
