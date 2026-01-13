@@ -187,7 +187,7 @@ useEffect(() => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="grid grid-cols-3 gap-8 mt-20 max-w-2xl mx-auto"
+            className="grid grid-cols-3 gap-8 mt-12 sm:mt-16 md:mt-20 max-w-2xl mx-auto mb-16 sm:mb-0"
           >
             {[
               { value: "30+", label: "Projects Delivered" },
@@ -210,7 +210,7 @@ useEffect(() => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1 }}
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 hidden sm:block"
       >
         <motion.div
           animate={{ y: [0, 10, 0] }}
