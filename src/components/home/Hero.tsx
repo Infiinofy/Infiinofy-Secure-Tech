@@ -210,7 +210,7 @@ useEffect(() => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1 }}
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 hidden sm:block"
+        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 "
       >
         <motion.div
           animate={{ y: [0, 10, 0] }}
