@@ -142,15 +142,15 @@ useEffect(() => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl md:text-7xl font-bold mb-6 leading-[1.1]"
+            className="text-4xl md:text-7xl font-bold mb-8 leading-tight"
           >
             Elevate Your
-            <span className="block text-gradient-gold leading-[1.2]">
+            <span className="block text-gradient-gold leading-normal text-3xl sm:text-5xl md:text-7xl pb-0 sm:pb-2">
               {displayText || "\u00A0"}
-              <span
+              {/* <span
                 className="border-l-2 border-primary/70 ml-2 animate-pulse"
                 aria-hidden="true"
-              />
+              /> */}
             </span>
           </motion.h1>
 
@@ -158,7 +158,7 @@ useEffect(() => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl md:text-2xl text-white mb-10 max-w-2xl mx-auto" //text-muted-foreground
+            className="text-lg md:text-2xl text-white mb-10 max-w-2xl mx-auto pt-0 sm:pt-2" 
           >
             Where innovation meets elegance. We craft sophisticated digital experiences that transform businesses and captivate audiences.
           </motion.p>
@@ -170,13 +170,13 @@ useEffect(() => {
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <Link to="/schedule">
-              <Button size="lg" className="text-lg px-8 hover-glow group">
+              <Button size="lg" className="text-sm sm:text-lg px-8 hover-glow group">
                 Start Your Project
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
             <Link to="/projects">
-              <Button size="lg" variant="secondary" className="text-lg px-8 hover-lift">
+              <Button size="lg" variant="secondary" className="text-sm sm:text-lg px-8 hover-lift">
                 View Our Work
               </Button>
             </Link>
@@ -195,10 +195,10 @@ useEffect(() => {
               { value: "25+", label: "Infiinos" },
             ].map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-gradient-gold mb-2">
+                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-gradient-gold mb-2">
                   {stat.value}
                 </div>
-                <div className="text-sm text-muted-foreground">{stat.label}</div>
+                <div className="text-sm sm:text-lg text-muted-foreground">{stat.label}</div>
               </div>
             ))}
           </motion.div>
