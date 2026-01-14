@@ -10,7 +10,7 @@ const ScrollToTop = () => {
   // Show button when page is scrolled down
   useEffect(() => {
     const toggleVisibility = () => {
-      if (window.pageYOffset > 300) {
+      if (window.pageYOffset > -1) {
         setIsVisible(true);
       } else {
         setIsVisible(false);
@@ -75,7 +75,7 @@ const ScrollToTop = () => {
       {isVisible && (
         <Button
           onClick={handleClick}
-          className="fixed bottom-8 right-8 z-50 rounded-full w-12 h-12 p-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-black hover:bg-gray/90"
+          className="fixed bottom-8 right-8 z-50 rounded-full w-12 h-12 p-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-transperent hover:bg-primary/20"
           aria-label="Scroll to top"
         >
           {showScrollDownAnimation ? (
