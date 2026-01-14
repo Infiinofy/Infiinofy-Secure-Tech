@@ -4,7 +4,7 @@ import LogoGlobe from "./LogoGlobe";
 const About = () => {
 
   return (
-    <section className="py-24 relative overflow-hidden">
+    <section id="about" className="py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5" />
 
       <div className="container mx-auto px-6 relative z-10">

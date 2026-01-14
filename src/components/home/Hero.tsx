@@ -7,6 +7,8 @@ import heroBg from "@/assets/hero_bg.png";
 import InteractiveSpiral from "@/components/InteractiveSpiral";
 import MeteorShower from "@/components/MeteorShower"
 import TwinklingStars from "@/components/TwinklingStars";
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+
 const phrases = [
   "Digital Presence",
   "Intelligent Products",
@@ -84,6 +86,12 @@ useEffect(() => {
 
   return () => clearTimeout(timeout);
 }, [displayText, phraseIndex, phase, phrases]);
+const scrollToSection = (href: string) => {
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -206,20 +214,27 @@ useEffect(() => {
       </div>
 
       {/* Scroll Indicator */}
-      <motion.div
+      {/* <motion.div
+       onClick={() => scrollToSection('#about')}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1 }}
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 "
+        className="absolute bottom-5 left-1/2 transform -translate-x-1/2 "
       >
-        <motion.div
+        <DotLottieReact
+      src="https://lottie.host/0b9d79e0-83d7-4a32-8fe3-88d1a345d3f8/vNXoX6fg2e.lottie"
+      className="w-30 h-12 cursor-pointer "
+      loop
+      autoplay
+    /> */}
+        {/* <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
           className="w-6 h-10 border-2 border-primary/30 rounded-full flex items-start justify-center p-2"
         >
           <div className="w-1 h-2 bg-primary rounded-full" />
-        </motion.div>
-      </motion.div>
+        </motion.div> */}
+      {/* </motion.div> */}
     </section>
   );
 };
